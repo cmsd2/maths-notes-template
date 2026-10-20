@@ -1,0 +1,21 @@
+title: Lean
+author: Chris Dawes
+version: 1.0.0
+quarto-required: ">=1.4.0"
+contributes:
+  formats:
+    common:
+      filters:
+        - lean-include.lua
+      syntax-definitions:
+        - lean.xml
+      highlight-style: vscode-light.theme
+    pdf:
+      pdf-engine: lualatex
+      # Covers Lean's Unicode (∫ ℝ ω ∂ ↦); ships with TeX Live and MiKTeX.
+      monofont: DejaVu Sans Mono
+      monofontoptions:
+        - Scale=0.85
+      include-in-header:
+        - code-wrap.tex
+    html: default

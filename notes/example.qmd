@@ -1,0 +1,62 @@
+---
+title: 'The sum $0 + 1 + \cdots + n$'
+---
+
+One fact, three ways: computer algebra finds it, Python plots it, Lean
+proves it. Copy this note to start your own.
+
+## Computer algebra
+
+Maxima, through the `maxima-tex` package, finds the closed form. The cell is
+hidden, so only the typeset result appears:
+
+```{python}
+#| echo: false
+from notelib import maxima
+maxima("factor(sum(k, k, 0, n)), simpsum", lhs=r"\sum_{k=0}^{n} k")
+```
+
+Each call starts a fresh Maxima process, and any Maxima error stops the
+render rather than showing a stale result. The same works for squares:
+
+```{python}
+#| echo: false
+maxima("sum(k^2, k, 1, n), simpsum, factor", lhs=r"\sum_{k=1}^{n} k^2")
+```
+
+## A picture
+
+Code shared between notes lives in the `notelib` package (`lib/notelib/`).
+Here it supplies the partial sums; the note only draws them.
+
+```{python}
+#| label: fig-sums
+#| fig-cap: "Partial sums of $k$ against $n^2/2$: the gap is exactly $n/2$."
+import matplotlib.pyplot as plt
+import numpy as np
+from notelib.series import partial_sums
+
+n = np.arange(0, 21)
+fig, ax = plt.subplots(figsize=(5, 3))
+ax.plot(n, partial_sums(n), "o", label=r"$0 + 1 + \cdots + n$")
+ax.plot(n, n**2 / 2, label=r"$n^2/2$")
+ax.set_xlabel("$n$")
+ax.legend()
+plt.show()
+```
+
+@fig-sums shows the sum growing like $n^2/2$.
+
+## A proof
+
+Lean checks the statement. The block below is empty in the source; it is
+filled from the `gauss` snippet in `lean/Notes/Basic.lean`, so the note
+always shows the code Lean actually checked:
+
+```{.lean include="/lean/Notes/Basic.lean" snippet="gauss"}
+```
+
+## Notation
+
+Macros in `shared/macros.tex` (PDF) and `shared/macros.html` (HTML) work in
+every note: $\sum_{k \in \N} 2^{-k} = 2$ and $\int_\R \e^{-x^2} \dd x = \sqrt{\pi}$.

@@ -1,0 +1,12 @@
+# Quarto
+/_output/
+/.quarto/
+**/*.quarto_ipynb
+# Python
+.venv/
+__pycache__/
+.pytest_cache/
+# Editors
+.vscode/
+.idea/
+.DS_Store

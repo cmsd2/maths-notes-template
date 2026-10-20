@@ -1,0 +1,9 @@
+# LF in the repo, native line endings on checkout (CRLF on Windows).
+* text=auto
+
+# Quarto's `freeze: auto` keys on an MD5 of the .qmd bytes. With CRLF
+# checkouts on Windows the hash never matches one made on macOS or Linux, so
+# every render there re-runs all code. LF everywhere keeps the hash stable,
+# and _freeze/ matches what Quarto itself writes.
+*.qmd text eol=lf
+_freeze/** text=auto eol=lf

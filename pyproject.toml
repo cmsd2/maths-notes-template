@@ -1,0 +1,39 @@
+[project]
+name = "notelib"
+version = "0"
+description = "Code shared between this repo's notes"
+requires-python = ">=3.12"
+dependencies = [
+    # What Quarto needs to run Python cells.
+    "ipykernel",
+    "nbclient",
+    "nbformat",
+    "pyyaml",
+    # For the notes themselves; add more with `uv add`.
+    "matplotlib",
+    "numpy",
+    "sympy",
+    "maxima-tex[notebook]",
+]
+
+# The notelib package (helpers for code cells in notes) lives in lib/notelib.
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["lib/notelib"]
+
+[tool.uv]
+package = true
+
+[tool.uv.sources]
+maxima-tex = { git = "https://github.com/cmsd2/maxima-tex" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

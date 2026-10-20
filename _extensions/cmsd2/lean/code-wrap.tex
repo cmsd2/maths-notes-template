@@ -1,0 +1,5 @@
+% Code blocks: small type, and wrap any line still too long for the box
+% (fvextra marks the continuation). Redefines Pandoc's own Highlighting
+% environment, so it covers every highlighted block, not only Lean.
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\small,commandchars=\\\{\}}

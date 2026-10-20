@@ -1,0 +1,39 @@
+name: Render
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Maxima runs the computer-algebra cells (unless _freeze/ already holds
+      # their results); DejaVu Sans Mono is the PDF code font.
+      - name: System packages
+        run: sudo apt-get update && sudo apt-get install -y maxima fonts-dejavu-core
+
+      - uses: astral-sh/setup-uv@v6
+
+      # TinyTeX installs any LaTeX package a render asks for.
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
+
+      - run: uv sync
+      - run: uv run pytest
+
+      - name: Check the Lean project
+        uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: lean
+
+      - name: Render notes
+        run: uv run quarto render
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: notes
+          path: _output

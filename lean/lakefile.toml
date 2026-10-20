@@ -1,0 +1,18 @@
+name = "Notes"
+version = "0.1.0"
+defaultTargets = ["Notes"]
+
+[leanOptions]
+pp.unicode.fun = true # pretty-prints `fun a ↦ b`
+relaxedAutoImplicit = false
+
+# To use Mathlib, uncomment this, set lean-toolchain to the same version as
+# the rev, then run `lake update` and `lake exe cache get` (several GB of
+# prebuilt files; without them Lake compiles Mathlib for hours).
+# [[require]]
+# name = "mathlib"
+# scope = "leanprover-community"
+# rev = "v4.36.0-rc1"
+
+[[lean_lib]]
+name = "Notes"

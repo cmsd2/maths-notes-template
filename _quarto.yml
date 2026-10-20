@@ -1,0 +1,23 @@
+project:
+  type: default
+  output-dir: _output
+  # Every .qmd anywhere, so organise notes however you like. Files and
+  # folders starting with _ or . are skipped automatically.
+  render:
+    - "**/*.qmd"
+
+# Re-run a note's code only when the note changes, and keep the results in
+# _freeze/. Commit _freeze/, and machines without Maxima can still render.
+execute:
+  freeze: auto
+
+# lean-pdf and lean-html come from the cmsd2/quarto-lean extension in
+# _extensions/: Lean highlighting, {.lean include="/lean/..." snippet="..."}
+# blocks, and PDF code that fits the page. Upgrade it with
+# `quarto update cmsd2/quarto-lean`.
+format:
+  lean-pdf:
+    papersize: a4
+    include-in-header: shared/macros.tex
+  lean-html:
+    include-before-body: shared/macros.html
