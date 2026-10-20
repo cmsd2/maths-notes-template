@@ -73,7 +73,10 @@ one window: Quarto notes with live preview, Python cells, and Lean with
 its interactive proof state.
 
 1. Open the repo folder. VS Code offers to install the recommended
-   extensions (Quarto, Python, Jupyter, Lean 4); accept.
+   extensions; accept. They are Quarto, Python, Jupyter, Lean 4, and
+   Unicode LaTeX, which turns `\alpha`, `\forall` or `\to` into α, ∀ or →
+   as you type in notes and Python. The Lean extension does the same in
+   `.lean` files.
 2. In VS Code's terminal, run `uv sync`.
 3. Run **Python: Select Interpreter** from the Command Palette
    (Ctrl+Shift+P, or Cmd+Shift+P on macOS) and pick the `.venv` interpreter.

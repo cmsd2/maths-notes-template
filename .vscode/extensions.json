@@ -4,6 +4,9 @@
         "quarto.quarto",
         "ms-python.python",
         "ms-toolsai.jupyter",
-        "leanprover.lean4"
+        "leanprover.lean4",
+        // Type \alpha, \forall, \to ... to insert α, ∀, → in notes and Python,
+        // as the Lean extension already does in .lean files.
+        "oijaz.unicode-latex"
     ]
 }
