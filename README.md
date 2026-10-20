@@ -66,6 +66,24 @@ or set `MAXIMA` to the full path of `maxima.bat`. With MiKTeX, the first
 PDF render installs LaTeX packages on the fly and may fail part-way; render
 again.
 
+## Editing in VS Code (recommended)
+
+[VS Code](https://code.visualstudio.com) handles every part of this repo in
+one window: Quarto notes with live preview, Python cells, and Lean with
+its interactive proof state.
+
+1. Open the repo folder. VS Code offers to install the recommended
+   extensions (Quarto, Python, Jupyter, Lean 4); accept.
+2. In VS Code's terminal, run `uv sync`.
+3. Run **Python: Select Interpreter** from the Command Palette
+   (Ctrl+Shift+P, or Cmd+Shift+P on macOS) and pick the `.venv` interpreter.
+4. Open `notes/example.qmd` and run **Quarto: Preview**
+   (Ctrl+Shift+K, or Cmd+Shift+K). The preview refreshes on every save.
+
+Lean files under `lean/` work in the same window: the Lean 4 extension
+finds the Lake project by itself and shows goals as you move through a
+proof.
+
 ## Writing notes
 
 - **Computer algebra.** `from notelib import maxima`, then

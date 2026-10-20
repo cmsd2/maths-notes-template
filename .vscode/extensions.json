@@ -1,0 +1,9 @@
+{
+    // VS Code offers to install these when the folder is opened.
+    "recommendations": [
+        "quarto.quarto",
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "leanprover.lean4"
+    ]
+}
