@@ -1,0 +1,10 @@
+---
+title: "Notes"
+# The contents page is HTML only; each note links to its own PDF.
+format: lean-html
+listing:
+  contents: notes
+  type: table
+  sort: title
+  fields: [title, description, date]
+---

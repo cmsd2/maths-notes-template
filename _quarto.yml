@@ -1,10 +1,20 @@
 project:
-  type: default
-  output-dir: _output
+  # A website: every note becomes an HTML page with a link to its PDF, and
+  # CI publishes the lot to GitHub Pages.
+  type: website
+  output-dir: _site
   # Every .qmd anywhere, so organise notes however you like. Files and
-  # folders starting with _ or . are skipped automatically.
+  # folders starting with _ or . are skipped automatically. (Markdown files
+  # such as README.md are left out.)
   render:
     - "**/*.qmd"
+
+website:
+  title: "Notes"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Contents
 
 # Re-run a note's code only when the note changes, and keep the results in
 # _freeze/. Commit _freeze/, and machines without Maxima can still render.
@@ -16,8 +26,10 @@ execute:
 # blocks, and PDF code that fits the page. Upgrade it with
 # `quarto update cmsd2/quarto-lean`.
 format:
+  lean-html:
+    include-before-body: shared/macros.html
+    # Latin Modern text to match the PDF and MathJax's maths.
+    css: shared/latin-modern.css
   lean-pdf:
     papersize: a4
     include-in-header: shared/macros.tex
-  lean-html:
-    include-before-body: shared/macros.html

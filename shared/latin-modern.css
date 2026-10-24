@@ -1,0 +1,43 @@
+/* Latin Modern (the OpenType Computer Modern) for the HTML body text, so it
+   matches the PDF and MathJax's maths. The font files come from the
+   latex.css package on jsDelivr, pinned to one version. */
+@font-face {
+  font-family: "Latin Modern";
+  src: url("https://cdn.jsdelivr.net/npm/latex.css@1.13.0/fonts/LM-regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Latin Modern";
+  src: url("https://cdn.jsdelivr.net/npm/latex.css@1.13.0/fonts/LM-italic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Latin Modern";
+  src: url("https://cdn.jsdelivr.net/npm/latex.css@1.13.0/fonts/LM-bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Latin Modern";
+  src: url("https://cdn.jsdelivr.net/npm/latex.css@1.13.0/fonts/LM-bold-italic.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+.title, .subtitle,
+#TOC, #quarto-margin-sidebar {
+  font-family: "Latin Modern", "Computer Modern Serif", Georgia, serif;
+}
+
+/* Latin Modern's strokes are thin on screen; a slightly larger size helps. */
+body {
+  font-size: 1.1rem;
+}

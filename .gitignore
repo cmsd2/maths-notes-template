@@ -1,5 +1,5 @@
 # Quarto
-/_output/
+/_site/
 /.quarto/
 **/*.quarto_ipynb
 # Python
