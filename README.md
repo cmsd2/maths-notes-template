@@ -1,5 +1,12 @@
 # maths-notes-template
 
+[![Render](https://github.com/cmsd2/maths-notes-template/actions/workflows/render.yml/badge.svg)](https://github.com/cmsd2/maths-notes-template/actions/workflows/render.yml)
+[![Notes](https://img.shields.io/badge/notes-online-blue)](https://cmsd2.github.io/maths-notes-template/)
+
+Rendered notes: **<https://cmsd2.github.io/maths-notes-template/>**, with
+the example also as a
+[PDF](https://cmsd2.github.io/maths-notes-template/notes/example.pdf).
+
 A starting point for maths notes that mix prose, computer algebra, Python
 figures and Lean proofs, rendered to PDF and HTML by
 [Quarto](https://quarto.org).
@@ -22,16 +29,22 @@ Click **Use this template** on GitHub to make your own copy.
 
 ```
 notes/            your notes, as .qmd files, in any folders you like
+index.qmd         the contents page: a table of every note in notes/
 lib/notelib/      Python shared between notes (an installed package)
 tests/            pytest tests for notelib
 lean/             a Lake project; notes include snippets from it
-shared/           LaTeX and MathJax macros used by every note
+shared/           LaTeX and MathJax macros, and the HTML font, used by every note
 _extensions/      the quarto-lean extension (vendored; don't edit)
 _freeze/          saved results of code cells (created on first render; commit it)
 ```
 
 Every `.qmd` in the repo is rendered, so organise `notes/` however you like,
-or rename it. Folders starting with `_` or `.` are skipped.
+or rename it (and change `contents:` in `index.qmd` to match). Folders
+starting with `_` or `.` are skipped.
+
+The repo is a Quarto website: each note becomes an HTML page with a link to
+its PDF, and `index.qmd` lists them all. The HTML sets its text in Latin
+Modern, the font of the PDF, from `shared/latin-modern.css`.
 
 ## Setup
 
@@ -49,7 +62,7 @@ Then, in your copy of the repo:
 
 ```sh
 uv sync                  # Python, Jupyter and the note packages, into .venv
-uv run quarto render     # every note to _output/, as PDF and HTML
+uv run quarto render     # every note to _site/, as HTML and PDF
 cd lean && lake build    # check the Lean project
 ```
 
@@ -127,10 +140,23 @@ Two things to know:
 The Lake project starts without Mathlib so it builds in seconds. See
 [`lean/README.md`](lean/README.md) to add it.
 
-## CI
+## CI and GitHub Pages
 
-`.github/workflows/render.yml` runs the tests, checks the Lean project,
-renders every note, and uploads `_output/` as an artifact.
+`.github/workflows/render.yml` runs the tests, checks the Lean project and
+renders every note to HTML and PDF. On pushes to the default branch it
+publishes `_site/` to GitHub Pages; pull requests only render.
+
+In your copy, switch Pages on once, with GitHub Actions as the source:
+**Settings → Pages → Build and deployment → Source: GitHub Actions**, or
+
+```sh
+gh api -X POST repos/OWNER/REPO/pages -f build_type=workflow
+```
+
+Then change the links at the top of this README to
+`https://OWNER.github.io/REPO/`. Pages on a private repository needs a paid
+GitHub plan; without one, delete the `deploy` job and the notes still render
+in CI.
 
 ## Licence
 

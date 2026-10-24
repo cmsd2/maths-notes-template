@@ -3,6 +3,7 @@ name: Render
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
   render:
@@ -30,10 +31,29 @@ jobs:
         with:
           lake-package-directory: lean
 
+      # Every note as an HTML page and a PDF, into _site/.
       - name: Render notes
         run: uv run quarto render
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
-          name: notes
-          path: _output
+          path: _site
+
+  # Publish _site/ to GitHub Pages on pushes to the default branch. Needs
+  # Pages switched on with "GitHub Actions" as the source (see the README).
+  deploy:
+    needs: render
+    if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
